@@ -1,0 +1,26 @@
+{
+  "name": "dsh-sansheng-liubu-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "description": "三省六部工作台：右侧朝堂部门树、任务与成果",
+  "type": "module",
+  "exports": {
+    "./client": "./lib/client.js"
+  },
+  "files": [
+    "lib/**"
+  ],
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5"
+  }
+}

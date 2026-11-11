@@ -1,0 +1,8 @@
+.scratch/
+.research/
+node_modules/
+*.log
+.stats.html
+review_results.json
+# 生图实验残留，不进版本历史；要留下的预览图放 docs/
+dsh-image-gen/

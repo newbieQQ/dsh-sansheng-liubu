@@ -1,0 +1,35 @@
+{
+  "name": "dsh-sansheng-liubu-mode",
+  "version": "0.12.1",
+  "private": true,
+  "description": "三省六部工作台：十席独立会话、项目账本、派工与分层记忆",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "CHANGELOG.md",
+    "scripts",
+    "workbench"
+  ],
+  "icon": "./icon.svg",
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test --test-isolation=none workbench/test/*.test.mjs workbench/panel/test/client.test.mjs",
+    "workbench:install": "node scripts/workbench-install.mjs",
+    "workbench:preflight": "node scripts/workbench-preflight.mjs",
+    "preview:workbench": "node scripts/preview-workbench.mjs"
+  },
+  "license": "MIT"
+}

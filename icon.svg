@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="三省六部">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9b6b2f"/>
+      <stop offset="1" stop-color="#5f351b"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="14" width="108" height="100" rx="18" fill="url(#g)"/>
+  <path d="M31 45h66M39 61h50M47 77h34" fill="none" stroke="#f7e5b7" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="31" cy="94" r="7" fill="#f7e5b7"/>
+  <circle cx="64" cy="94" r="7" fill="#f7e5b7"/>
+  <circle cx="97" cy="94" r="7" fill="#f7e5b7"/>
+</svg>

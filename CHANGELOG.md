@@ -1,6 +1,14 @@
 # Changelog
 
-> 版本号以 `package.json` 为准（当前 0.13.0）。更早的 0.6.x 条目沿用旧编号，保留作历史。
+> 版本号以 `package.json` 为准（当前 0.13.2）。更早的 0.6.x 条目沿用旧编号，保留作历史。
+
+## 0.13.2 — 修面板接管主区时与官方入口重复声明槽位
+
+0.13.1 修好 betterSidebar 后，干净档案实测继续往下走又撞到第二个启动失败：面板接管 `main.conversation` 时在 children 里声明 `conversation.header`，而官方会话入口已经声明了同一个槽，宿主的槽注册表拒绝重复声明、同步抛错，面板再次激活失败。改为先按原样注册、被拒时退回不带 children 的注册（槽由官方入口声明、仍然存在，组件里的 renderSlot 照常渲染）。
+
+## 0.13.1 — 修面板在缺 betterSidebar 的宿主上把整个启动页打崩
+
+干净档案实测发现：面板的 `betterSidebarOf` 里有一处未经防护的 `ctx.betterSidebar` 直读——该服务不在面板的 inject 声明里，宿主没有它时 Cordis 直接抛错，面板激活失败并把整个 web 启动打到「Failed to load plugins」页（白屏）。这与面板自己「服务探测缺了也要照常加载」的设计意图相悖。改为只走带 try/catch 的 `readService` 探测：缺服务时按原有降级路径走（警告 + 仍注册 pane 槽），有服务时行为不变。
 
 ## 0.13.0 — 朝堂面板并回主包：商店里只剩一条
 

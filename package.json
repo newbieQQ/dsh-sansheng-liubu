@@ -1,6 +1,6 @@
 {
   "name": "dsh-sansheng-liubu-mode",
-  "version": "0.13.0",
+  "version": "0.13.2",
   "description": "三省六部工作台：十席独立会话、项目账本、派工与分层记忆",
   "type": "module",
   "main": "./index.js",

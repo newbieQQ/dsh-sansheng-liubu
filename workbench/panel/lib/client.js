@@ -434,7 +434,7 @@ window.__ModuleLoader__.load({
     }
 
     function betterSidebarOf(ctx) {
-      var candidates = [readService(ctx, "betterSidebar"), ctx && ctx.betterSidebar];
+      var candidates = [readService(ctx, "betterSidebar")];
       for (var i = 0; i < candidates.length; i++) {
         var candidate = candidates[i];
         if (candidate && typeof candidate.registerTab === "function") return candidate;
@@ -2203,13 +2203,23 @@ window.__ModuleLoader__.load({
       //    逃生开关：localStorage["sansheng.workbench.main"] = "off" 时跳过本段。
       if (mainTakeoverEnabled() && ctx.slots && typeof ctx.slots.inject === "function") {
         ctx.slots.inject("main.conversation", function () {
-          return ctx.slots.register({
-            name: "main.conversation",
-            priority: -1,
-            children: {
-              "conversation.header": { kind: "single", scope: "session-maybe" },
-            },
-          }, createConversationMain(ctx));
+          try {
+            return ctx.slots.register({
+              name: "main.conversation",
+              priority: -1,
+              children: {
+                "conversation.header": { kind: "single", scope: "session-maybe" },
+              },
+            }, createConversationMain(ctx));
+          } catch (error) {
+            // 官方会话入口已声明 conversation.header：重复声明会被宿主拒绝，
+            // 退回不带 children 的注册——槽本身由官方入口声明、仍然存在，
+            // 组件里的 renderSlot("conversation.header") 照常工作。
+            return ctx.slots.register({
+              name: "main.conversation",
+              priority: -1,
+            }, createConversationMain(ctx));
+          }
         });
       }
     }

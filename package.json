@@ -1,13 +1,13 @@
 {
   "name": "dsh-sansheng-liubu-mode",
-  "version": "0.12.2",
-  "private": true,
+  "version": "0.13.0",
   "description": "三省六部工作台：十席独立会话、项目账本、派工与分层记忆",
   "type": "module",
   "main": "./index.js",
   "exports": {
     ".": "./index.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./client": "./workbench/panel/lib/client.js"
   },
   "files": [
     "index.js",
@@ -23,6 +23,14 @@
     "manifestVersion": 1,
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ]
     }
   },
   "scripts": {

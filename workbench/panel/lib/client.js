@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: "dsh-sansheng-liubu-workbench",
+  id: "dsh-sansheng-liubu-mode",
   factory: (require) => {
     var module = { exports: {} };
     var exports = module.exports;
@@ -15,7 +15,7 @@ window.__ModuleLoader__.load({
     const API_BASE = "/sansheng/workbench";
     const TAB_ID = "sansheng-liubu-workbench";
     const TAB_KIND = "sansheng-liubu-workbench";
-    const CSS_ID = "dsh-sansheng-liubu-workbench/workbench.css";
+    const CSS_ID = "dsh-sansheng-liubu-mode/workbench.css";
     const RAIL_WIDTH_KEY = "sansheng.workbench.railWidth";
     const MAIN_SWITCH_KEY = "sansheng.workbench.main";
     const RAIL_MIN = 340;
@@ -688,7 +688,7 @@ window.__ModuleLoader__.load({
         var selector = "style[data-plugin-css=" + JSON.stringify(CSS_ID) + "]";
         if (typeof document.querySelector === "function" && document.querySelector(selector) !== null) return;
         var tag = document.createElement("style");
-        tag.dataset.plugin = "dsh-sansheng-liubu-workbench";
+        tag.dataset.plugin = "dsh-sansheng-liubu-mode";
         tag.dataset.pluginCss = CSS_ID;
         tag.textContent = CSS;
         if (document.head && typeof document.head.appendChild === "function") document.head.appendChild(tag);

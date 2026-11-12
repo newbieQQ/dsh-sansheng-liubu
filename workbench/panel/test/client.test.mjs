@@ -121,7 +121,7 @@ function loadPlugin(options) {
 
   vm.runInNewContext(SOURCE, sandbox, { filename: CLIENT_PATH });
   assert.ok(definition, "bundle 应该调用 window.__ModuleLoader__.load");
-  assert.equal(definition.id, "dsh-sansheng-liubu-workbench", "bundle id 必须是包名");
+  assert.equal(definition.id, "dsh-sansheng-liubu-mode", "bundle id 必须是主包包名（面板已并回主包）");
 
   const exports = definition.factory(function (id) {
     if (id === "react") return react;

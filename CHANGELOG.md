@@ -1,6 +1,15 @@
 # Changelog
 
-> 版本号以 `package.json` 为准（当前 0.12.1）。更早的 0.6.x 条目沿用旧编号，保留作历史。
+> 版本号以 `package.json` 为准（当前 0.13.0）。更早的 0.6.x 条目沿用旧编号，保留作历史。
+
+## 0.13.0 — 朝堂面板并回主包：商店里只剩一条
+
+应需求把面板包 `dsh-sansheng-liubu-workbench`（0.2.0）并回主包 `dsh-sansheng-liubu-mode`，单独安装时不再装两条：
+
+- 根包新增 `dsh.client`（平台与 inject 沿用面板原来的三项）与 exports `./client`，指向 `workbench/panel/lib/client.js`；面板客户端的模块注册 id、CSS id 与 DOM 标记同步改为主包名。
+- 面板子包退役：其 package.json 去掉 `dsh` 声明并标 private，不再作为独立 bundle 被组合；`workbench/panel/` 目录保留为面板客户端的源码/产物所在。
+- 根包去掉 `private: true`（为发布到自有 Gitea npm 源做准备；git 安装不受影响）。
+- 商店索引同步去掉「三省六部 · 朝堂面板」一条，描述改回单条安装。QQ-dsh 捆绑包仍按旧结构 vendored，后续再跟进。
 
 ## 0.12.1 — 宿主冲突审计与加固
 

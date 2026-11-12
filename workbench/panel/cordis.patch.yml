@@ -1,0 +1,9 @@
+# dsh-sansheng-liubu-workbench bundle patch
+#
+# One insert row loads the package: the host entry is a no-op stub, the
+# actual feature lives in the web client (./client export, see the `dsh`
+# manifest in package.json).
+- insert:
+    - id: dsh-sansheng-liubu-workbench
+      name: 'dsh-sansheng-liubu-workbench'
+      config: {}

@@ -1,6 +1,6 @@
 # 三省六部开发 TODO
 
-更新日期：2026-11-10
+更新日期：2026-11-10（模型推荐段于 2026-11-12 实时更新）
 
 当前阶段：角色与面板规划。以下勾选框表示实施是否完成，不表示方案是否确认。除特别注明外均为用户已确认、待实施；创建本文件不代表授权安装技能或修改运行配置。已有实验代码也不代表下面的新方案已实现。
 
@@ -32,12 +32,29 @@
 
 以下角色与模型的搭配均为推荐候选，不代表用户已确认绑定；具体默认模型须后续选定。用户明确偏好尽量不用 Claude。
 
-- [ ] 尽量不用 Claude，不列入默认模型，也不因困难自动切换到 Claude。
-- [ ] 中书省优先 GPT 系列，具体型号依据实际可用 API、规划质量与工具调用能力选择。
-- [ ] 门下省优先 Kimi 系列，具体型号依据审核能力和实际通道选择；需检查页面图像时核实图片输入支持。
-- [ ] 礼部优先支持图像输入的 Flash 模型，用户提出 MiMo Flash 或其他视觉 Flash 作为候选。不能仅凭 Flash 名称假定支持图像，接入前验证具体型号、API 图片传递和页面理解能力。
+- [ ] 尽量不用 Claude，不列入默认模型，也不因困难自动切换到 Claude。（2026-11-12 注：全球编程/Agent 榜首仍是 Claude Opus 5.5 / Fable 5.2，按此偏好未列入下表。）
 - [ ] 图像理解与图像生成分别配置：礼部模型需能读取截图、图表与页面；需要生成或编辑图片时另用相应工具。
-- [ ] 各角色模型保持可手动切换，技能绑定角色而非模型；其余部门具体默认模型待确认，不把此前助手推荐当作已定配置。
+- [ ] 各角色模型保持可手动切换，技能绑定角色而非模型；不把下表推荐当作已定配置。
+
+### 2026-11-12 实时更新：十席推荐（依据 2026-11-05～11 的 SuperCLUE、SWE-bench、Terminal-Bench、ProgramBench、FrontierMath、LMArena 等公开榜单）
+
+通道标记：●＝现有通道（DeepSeek 官方 API 按量付费，或 WorkBuddy/Magpie 订阅池，具体版本以 Magpie 实际刷出的模型列表为准）；○＝需另开通道（OpenAI / Google API，用户目前未接）。Gemini 4 Carbon 虽居多榜第一，但仅向受 vet 的安全从业者开放、无公开 model id，不列入推荐。
+
+| 席位 | 主推 | 备选 | 推理档 | 依据 |
+|---|---|---|---|---|
+| 丞相 lead | DeepSeek V4.1 Flash (1017) ● | Kimi K3.1 Pro ● | 中 | 快、便宜、1M 上下文，SuperCLUE 国内第二；重要汇报临时切 V4 Pro |
+| 中书 zhongshu | GPT-6 Astra ○ | Kimi K3.1 Pro ● | 高 | GPQA 96.0 / HLE 54.8 / ARC-AGI-2 95.0 推理天花板，沿用原 GPT 方向 |
+| 尚书 shangshu | Kimi K3.1 Pro ● | Qwen3.8-Max ● | 中高 | 多任务拆解与长程 Agent；ProgramBench 第一、Terminal-Bench 65.7。备选改国产替代（2026-11-12 用户改定，原 GPT-6 Astra）：Qwen3.8-Max 擅长复杂 Agent 与长程任务、企业级调度配套，与主推 Kimi 不同家族，可互为故障转移 |
+| 门下 menxia | Gemini 4 Argon ○ | Kimi K3.1 Pro ● | 高 | 幻觉控制 83.19 全球断层、事实性第一；与中书/尚书不同家族保独立性；备选 Kimi 为国内幻觉控制第一（原定方向） |
+| 吏部 libu | DeepSeek V4.1 Flash (1017) ● | GLM-5.3 ● | 中 | 改 Flash（2026-11-12 用户改定）：编制与技能配置多为调研加结构化文案，Flash 够快够用；复杂选型评估切备选 GLM-5.3 |
+| 户部 hubu | DeepSeek V4.1 Flash (1017) ● | DeepSeek V4 Pro ● | 高 | 改 Flash：数理与代码计算靠写脚本复算，Flash 便宜量大（FrontierMath 开放权重最强一档）；硬核统计与证明切备选 V4 Pro。备选原 GPT-6.1 Sol，按「备选列全国产」替换 |
+| 礼部 lipu | Gemini 3.8 Flash ○ | MiMo-V2.6-Flash ● | 中 | 视觉 Arena 第一（1411）、写作性价比之选、1M；备选 MiMo 全模态 MIT 开源、极便宜。未改 DS Flash：礼部必须读截图、图表与页面，DS Flash 主线是文本模型（Vision 变体接入未核实），视觉是硬需求 |
+| 兵部 bingbu | DeepSeek V4.1 Flash (1017) ● | Kimi K3.1 Pro ● | 中高 | 改 Flash：调试靠流程技能加代码能力，DeepSWE 77.0 够打，部署脚本属常规活；长程终端任务切备选 Kimi（Terminal-Bench 65.7） |
+| 刑部 xingbu | DeepSeek V4.1 Flash (1017) ● | Kimi K3.1 Pro ● | 高 | 本就是 Flash：DeepSWE 77.0 反超 Kimi 与 Opus。备选原 GPT-6.1 Sol，按「备选列全国产」换 Kimi——不同家族、国内幻觉控制第一，复核视角独立 |
+| 工部 gongbu | GLM-5.3 ● | DeepSeek V4 Pro ● | 高 | SWE-bench 独立实测 95.4（非 Claude 阵营最高一档）、1M 无损上下文读整仓、重构稳；备选 DeepSeek 算法/后端强。未改 Flash：工部产出是生产代码，换 Flash 会明显降档，保留 GLM-5.3 |
+
+2026-11-12 用户两条改定：①备选列（第三列）全部换国产替代，不留国外备选；②六部执行席能用 DeepSeek Flash 的改 Flash——吏、户、兵、刑四部已改，礼部（视觉硬需求）、工部（生产代码质量）保留原主推。Flash 走 DeepSeek 官方 API 按量付费，不占 WorkBuddy 单模型约 45 次/5 小时的 429 窗口；丞相与三省决策席仍分散在 Flash / GPT / Kimi / Gemini 上。
+翰林（后续席位）：原定「默认 Flash、重要总结切 Pro」不变，具体化为默认 DeepSeek V4.1 Flash，重要总结切 Kimi K3.1 Pro 或 Gemini 4 Argon。
 
 ## 面板与基础接口
 

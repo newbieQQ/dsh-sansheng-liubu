@@ -1,14 +1,18 @@
 {
   "name": "dsh-sansheng-liubu-workbench",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
   "description": "三省六部工作台：右侧朝堂部门树、任务与成果",
   "type": "module",
   "exports": {
-    "./client": "./lib/client.js"
+    ".": "./index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
   },
   "files": [
-    "lib/**"
+    "lib/**",
+    "index.js",
+    "cordis.patch.yml"
   ],
   "dsh": {
     "client": {
@@ -18,6 +22,9 @@
         "@deepseek-ai/dsh-client-ui-workspace",
         "@deepseek-ai/dsh-client-ui-primitives"
       ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
     }
   },
   "peerDependencies": {

@@ -2059,7 +2059,14 @@ window.__ModuleLoader__.load({
               ? renderFactorySlot(
                 "conversation.content",
                 { variant: "main", phase: phaseValue, hero: heroValue },
-                { slots: { widthControls: input.widthControls || {} } },
+                // widthControls 槽要的是组件本身（官方根组件传的是
+                // ConversationWidthControls 函数）；宿主没有给真组件时
+                // 宁可不传 slots，让工厂用它自带的 NoConversationWidthControls
+                // 兜底。旧版在这里塞了个空对象 {}，工厂把它当组件渲染，
+                // React 抛 #130（element type got: object），中央会话整片白屏。
+                typeof input.widthControls === "function"
+                  ? { slots: { widthControls: input.widthControls } }
+                  : {},
               )
               : null,
           ]);
